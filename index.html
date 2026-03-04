@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Box</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #313131;
+        font-family: cursive;
+      }
+
+      /* Glass Card */
+      .download-box {
+        width: 320px;
+        padding: 25px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        color: white;
+        text-align: center;
+      }
+
+      .download-box h3 {
+        margin-bottom: 20px;
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+
+      /* Progress Bar */
+      .progress {
+        width: 100%;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 10px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        border-radius: 20px;
+        background: linear-gradient(90deg, #00f5a0, #00d9f5);
+        transition: width 0.3s ease;
+      }
+
+      /* Percentage Text */
+      .percentage {
+        font-size: 14px;
+        margin-bottom: 20px;
+        opacity: 0.8;
+      }
+
+      /* Button */
+      button {
+        padding: 10px 25px;
+        border: none;
+        border-radius: 30px;
+        background: linear-gradient(90deg, #00f5a0, #00d9f5);
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      
+    </style>
+  </head>
+
+  <body>
+    <div class="download-box">
+      <h3>Download File</h3>
+
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+
+      <div class="percentage">0%</div>
+
+      <button id="downloadBtn">Start Download</button>
+    </div>
+
+    <script>
+      let btn = document.querySelector("#downloadBtn");
+      let progress = document.querySelector(".progress-bar");
+      let percentage = document.querySelector(".percentage");
+
+      btn.addEventListener("click", () => {
+        let count = 0;
+        progress.style.width = "0%";
+        percentage.innerText = "0%";
+        btn.disabled = true;
+
+        let s = setInterval(() => {
+          count++;
+
+          progress.style.width = `${count}%`;
+          percentage.innerText = `${count}%`;
+
+          if (count >= 100) {
+            clearInterval(s);
+            btn.disabled = false;
+            btn.innerText = "Download Again";
+          }
+        }, 40);
+      });
+    </script>
+  </body>
+</html>
